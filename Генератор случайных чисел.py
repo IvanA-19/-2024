@@ -53,5 +53,4 @@ for _ in range(10000):
     test_sample.append(Random(4500, 2, 1000, get_seed()).get_rnd())
 
 
-print(len(test_sample), len(set(test_sample)))
 print(test_sample)
