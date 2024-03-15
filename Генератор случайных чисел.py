@@ -49,8 +49,14 @@ class Random:
 
 test_sample = []
 
+
 for _ in range(10000):
     test_sample.append(Random(4500, 2, 1000, get_seed()).get_rnd())
 
 
-print(test_sample)
+with open('result.txt', 'w') as result_file:
+    for e in test_sample:
+        result_file.write(str(e) + '\n')
+
+print('\n'.join(str(e) for e in test_sample))
+
