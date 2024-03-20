@@ -1,8 +1,7 @@
-import math
 from math import sqrt, pi, exp
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy. stats import norm
+from scipy.stats import norm
 
 
 result = []
@@ -30,7 +29,7 @@ for i in range(len(g)):
 D = Mg2 - M ** 2
 x = sqrt(D)
 
-f = [(1 / (x * math.sqrt(2 * math.pi)) * math.exp(-((g[i] - M) ** 2) / (2 * D))) for i in range(len(g))]
+f = [(1 / (x * sqrt(2 * pi)) * exp(-((g[i] - M) ** 2) / (2 * D))) for i in range(len(g))]
 
 print(f'Матожидание: {M}')
 print(f'Дисперсия: {D}')

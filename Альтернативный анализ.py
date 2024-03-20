@@ -1,5 +1,7 @@
-from math import sqrt, pi, exp, factorial
+from math import sqrt, factorial
 import matplotlib.pyplot as plt
+import numpy as np
+from scipy.stats import norm
 
 
 result = []
@@ -8,15 +10,10 @@ with open('test1.txt', 'r') as result_file:
         result.append(float(result_file.readline()))
 
 g = [result.count(e) for e in set(result)]
-p = [(1 / 10000) * (1 / g[i]) for i in range(len(g))]
+p = [(1 / 10) * (1 / g[i]) for i in range(len(g))]
 
 p = list(set(p))
 g = list(set(g))
-p0 = list(p)
-g0 = list(g)
-g0.sort()
-p0.sort()
-
 
 M = 0
 for i in range(len(g)):
@@ -28,8 +25,7 @@ Mg2 = 0
 for i in range(len(g)):
     Mg2 += (g[i] ** 2) * p[i]
 
-f = [(((factorial(len(g0))) / (factorial(g0[i]) * factorial(len(g0) - g0[i]))) * p0[i] ** g0[i] * (1 - p0[i]) ** (len(g0) - g0[i])) for i in range(len(g0))]
-print(f)
+f = [((factorial(10) / (factorial(g[i]) * factorial(10 - g[i]))) * (p[i] ** g[i]) * (1 - p[i]) ** (10 - g[i])) for i in range(len(g))]
 D = Mg2 - M ** 2
 x = sqrt(D)
 
@@ -41,14 +37,12 @@ print(f'Максимальное значение: {max(result)}')
 print(f'Уникальных значений в выборке: {len(set(result))}/{len(result)}')
 print(f'Наиболее встречаемое число: {result[g.index(max(g))]}, {max(g)} раз')
 
-fig, ax = plt.subplots(2, figsize=(12, 7))
+x0 = np.arange(0, 4, 0.001)
+fig, ax = plt.subplots(figsize=(12, 7))
 
-ax[0].hist(g0, weights=f, bins=range(0, len(g0), 1))
-ax[0].set_title(f'Плотность')
-
-ax[1].hist(g0, weights=p0, bins=range(0, len(g), 1))
-ax[1].set_title(f'Распределение')
-
+ax.hist(g, weights=f, bins=range(0, 6, 1))
+ax.set_title(f'Плотность')
+ax.plot(x0, norm.pdf(x0, M, x), color='DarkGreen')
 
 plt.show()
 

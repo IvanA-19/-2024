@@ -36,7 +36,16 @@ def get_decomposition(binary_string):
     return rnd
 
 
-test = [get_decomposition(get_binary_string()) for _ in range(10000)]
+def get_num():
+    rand_num = get_decomposition(get_binary_string())
+    a = 4500
+    c = 100
+    m = 2
+    res = (a + rand_num - c) % m
+    return res * 10 ** 6
+
+
+test = [get_num() for _ in range(10000)]
 
 with open('test1.txt', 'w') as file:
     for num in test:
